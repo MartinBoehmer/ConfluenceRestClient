@@ -7,7 +7,7 @@ See headers of source files for details.
 This product makes use of the following software libraries:
 
   Apache Commons BeanUtils under The Apache Software License, Version 2.0
-  Apache Commons Codec under The Apache Software License, Version 2.0
+  Apache Commons Codec under Apache License, Version 2.0
   Apache Commons Collections under Apache License, Version 2.0
   Apache Commons IO under Apache License, Version 2.0
   Apache Commons Lang under Apache License, Version 2.0
