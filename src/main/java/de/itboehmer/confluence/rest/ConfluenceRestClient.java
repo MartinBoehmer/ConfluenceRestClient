@@ -46,10 +46,17 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
+import java.util.logging.Level;
+import javax.net.ssl.SSLContext;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.conn.DefaultProxyRoutePlanner;
+import org.apache.http.ssl.SSLContextBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -94,7 +101,11 @@ public class ConfluenceRestClient implements RestPathConstants, RestParamConstan
         connect(uri, username, password, proxyHost, false);
     }
 
-    public void connect(URI uri, String username, String password, HttpHost proxyHost, boolean explicit) throws URISyntaxException, SecurityException {
+    public void connect(URI uri, String username, String password, HttpHost proxyHost, boolean explicitlyCheckCredentials) throws URISyntaxException, SecurityException {
+        connect(uri, username, password, proxyHost, false, false);
+    }
+
+    public void connect(URI uri, String username, String password, HttpHost proxyHost, boolean explicitlyCheckCredentials, boolean trustSelfSignedCerts) throws URISyntaxException, SecurityException {
         log.info("Setting up REST client:");
         this.confluenceBaseUri = uri;
         this.restApiBaseUri = buildRestApiBaseURI(uri);
@@ -131,10 +142,22 @@ public class ConfluenceRestClient implements RestPathConstants, RestParamConstan
         } else {
             log.info("  No proxy specified");
         }
+        // Self-signed certificates
+        if (trustSelfSignedCerts) {
+            SSLContext sslContext;
+            try {
+                sslContext = SSLContextBuilder.create()
+                        .loadTrustMaterial(new TrustSelfSignedStrategy())
+                        .build();
+                clientBuilder.setSSLContext(sslContext);
+            } catch (NoSuchAlgorithmException | KeyStoreException | KeyManagementException ex) {
+                throw new IllegalStateException("Cannot create SSL context to trust self-signed certificates", ex);
+            }
+        }
         this.httpclient = clientBuilder.build();
-        isInitialised = true;
+        this.isInitialised = true;
         // Check validity of credentials by user profile request
-        if (explicit) {
+        if (explicitlyCheckCredentials) {
             explicitlyCheckCredentials();
         }
     }
@@ -159,8 +182,7 @@ public class ConfluenceRestClient implements RestPathConstants, RestParamConstan
     }
 
     /**
-     * Closes the Confluence clioent and associated resources, like the HTTP
-     * client and the {@link ExecutorService}.
+     * Closes the Confluence clioent and associated resources, like the HTTP client and the {@link ExecutorService}.
      */
     public void close() {
         log.debug("Closing HTTP client");
