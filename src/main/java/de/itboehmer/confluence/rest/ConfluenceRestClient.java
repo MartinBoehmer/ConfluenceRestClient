@@ -1,6 +1,6 @@
 /**
  * Copyright 2016 Micromata GmbH
- * Modifications Copyright 2017 Martin Böhmer
+ * Modifications Copyright 2017-2018 Martin Böhmer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
-import java.util.logging.Level;
 import javax.net.ssl.SSLContext;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.conn.DefaultProxyRoutePlanner;

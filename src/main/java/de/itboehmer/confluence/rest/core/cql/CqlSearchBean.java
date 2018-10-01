@@ -1,5 +1,6 @@
 /**
  * Copyright 2016 Micromata GmbH
+ * Modifications Copyright 2018 Martin Böhmer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Author: Christian Schulze (c.schulze@micromata.de)
- * Date: 04.07.2016
- * Project: ConfluenceTransferPlugin
+ * @author Christian Schulze (c.schulze@micromata.de)
+ * @author Martin Böhmer
  */
 public class CqlSearchBean {
 
@@ -38,6 +38,8 @@ public class CqlSearchBean {
     private int limit;
 
     private boolean includeArchivedSpaces;
+
+    private boolean retrieveAllResults = false;
 
     public String getCql() {
         return cql;
@@ -94,4 +96,13 @@ public class CqlSearchBean {
     public void setStart(int start) {
         this.start = start;
     }
+
+    public boolean isRetrieveAllResults() {
+        return retrieveAllResults;
+    }
+
+    public void setRetrieveAllResults(boolean retrieveAllResults) {
+        this.retrieveAllResults = retrieveAllResults;
+    }
+
 }

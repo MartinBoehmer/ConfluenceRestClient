@@ -1,5 +1,6 @@
 /**
  * Copyright 2016 Micromata GmbH
+ * Modifications Copyright 2018 Martin Böhmer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Author: Christian Schulze (c.schulze@micromata.de)
- * Date: 06.07.2016
- * Project: ConfluenceTransferPlugin
+ * Bean to specify search queries.
+ *
+ * @author Christian Schulze (c.schulze@micromata.de)
+ * @author Martin Böhmer
  */
 public class CqlSearchResult {
 
@@ -69,7 +71,6 @@ public class CqlSearchResult {
         this.limit = limit;
     }
 
-
     public int getSearchDuration() {
         return searchDuration;
     }
@@ -108,5 +109,9 @@ public class CqlSearchResult {
 
     public void setResults(List<BaseBean> results) {
         this.results = results;
+    }
+
+    public boolean hasMoreResults() {
+        return this.start + this.size < this.totalSize;
     }
 }
