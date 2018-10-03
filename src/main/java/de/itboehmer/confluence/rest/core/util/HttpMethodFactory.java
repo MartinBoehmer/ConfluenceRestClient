@@ -33,7 +33,6 @@ import java.net.URI;
 import java.nio.charset.Charset;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.protocol.HTTP;
 
 /**
  * @author Christian Schulze (c.schulze@micromata.de)

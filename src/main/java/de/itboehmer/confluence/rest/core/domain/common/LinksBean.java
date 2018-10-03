@@ -1,6 +1,6 @@
 /**
  * Copyright 2016 Micromata GmbH
- * Modifications Copyright 2017 Martin Böhmer
+ * Modifications Copyright 2017-2018 Martin Böhmer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,12 @@ public class LinksBean {
     
     @Expose
     private String download;
+    
+    @Expose
+    private String next;
+    
+    @Expose
+    private String prev;
 
     public String getBase() {
         return base;
@@ -88,6 +94,22 @@ public class LinksBean {
 
     public void setDownload(String download) {
         this.download = download;
+    }
+
+    public String getNext() {
+        return next;
+    }
+
+    public void setNext(String next) {
+        this.next = next;
+    }
+
+    public String getPrev() {
+        return prev;
+    }
+
+    public void setPrev(String previous) {
+        this.prev = previous;
     }
     
 }
