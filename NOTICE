@@ -11,7 +11,6 @@ This product makes use of the following software libraries:
   Apache Commons Collections under Apache License, Version 2.0
   Apache Commons IO under Apache License, Version 2.0
   Apache Commons Lang under Apache License, Version 2.0
-  Apache Commons Logging under The Apache Software License, Version 2.0
   Apache Commons Validator under Apache License, Version 2.0
   Apache HttpClient under Apache License, Version 2.0
   Apache HttpClient Mime under Apache License, Version 2.0
@@ -20,6 +19,7 @@ This product makes use of the following software libraries:
   confluence-rest-client under Apache License, Version 2.0
   Gson under Apache 2.0
   Hamcrest Core under New BSD License
+  JCL 1.2 implemented over SLF4J under MIT License
   jsr311-api under CDDL License
   JUnit under Eclipse Public License 1.0
   Logback Classic Module under Eclipse Public License - v 1.0 or GNU Lesser General Public License
